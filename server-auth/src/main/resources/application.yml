@@ -1,0 +1,41 @@
+server:
+  port: 9002
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9001/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+
+jwt:
+  token-header: Authorization
+  expire: 14400
+  rsa-secret: xx1WET12^%3^(WE45
+client:
+  id: server-auth
+  secret: 123456
+  token-header: x-client-token
+  expire: 14400
+  rsa-secret: x2318^^(*WRYQWR(QW&T
+
+spring:
+  datasource:
+    name: dylan
+    url: jdbc:mysql://localhost:3306/springcloud
+    username: root
+    password: 111111
+    driver-class-name: com.mysql.jdbc.Driver
+  application:
+    name: auth-server
+  zipkin:
+    base-url: http://localhost:9411/
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  type-aliases-package: com.server.auth.dao.entity

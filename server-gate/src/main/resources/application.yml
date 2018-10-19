@@ -1,0 +1,45 @@
+server:
+  port: 9000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9001/eureka/
+
+zuul:
+  host:
+    connect-timeout-millis: 30000
+    socket-timeout-millis: 30000
+  routes:
+    auth-route:
+
+      path: /auth-server/**
+      service-id: auth-moudle
+  ratelimit:
+    key-prefix: dylan-ratelimite
+    enabled: true
+    repository: REDIS
+    behind-proxy: true
+    policies:
+      server-auth:
+        limit: 10
+        quota: 100
+        refresh-interval: 60
+
+spring:
+  application:
+    name: gate-server
+
+  zipkin:
+    base-url: http://localhost:9411/
+
+  sleuth:
+    web:
+      client:
+        enabled: true
+
+    sampler:
+      probability: 1.0
+
+
+
