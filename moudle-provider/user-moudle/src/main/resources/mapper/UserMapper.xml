@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~    Copyright (c) 2018-2025, lengleng All rights reserved.
+  ~
+  ~ Redistribution and use in source and binary forms, with or without
+  ~ modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~ this list of conditions and the following disclaimer.
+  ~ Redistributions in binary form must reproduce the above copyright
+  ~ notice, this list of conditions and the following disclaimer in the
+  ~ documentation and/or other materials provided with the distribution.
+  ~ Neither the name of the pig4cloud.com developer nor the names of its
+  ~ contributors may be used to endorse or promote products derived from
+  ~ this software without specific prior written permission.
+  ~ Author: lengleng (wangiegie@gmail.com)
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dylan.user.moudle.mapper.UserMapper">
+
+
+    <resultMap id="userVoResultMap" type="com.dylan.common.vo.usermoudle.UserVo">
+        <id column="user_id" property="userId"/>
+        <result column="name" property="name"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="phone" property="phone"/>
+        <result column="avatar" property="avatar"/>
+        <result column="address" property="address"/>
+        <result column="telephone" property="telephone"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="remark" property="remark"/>
+        <result column="enabled" property="enabled"/>
+        <collection property="roleList" ofType="com.dylan.common.vo.usermoudle.RoleVo">
+            <id column="role_id" property="roleId"/>
+            <result column="role_name" property="roleName"/>
+            <result column="role_code" property="roleCode"/>
+            <result column="role_desc" property="roleDesc"/>
+            <result column="del_flag" property="roleDesc"/>
+        </collection>
+    </resultMap>
+
+    <sql id="selectUserVo">
+        SELECT
+            *
+
+        FROM
+            tk_user AS `user`
+            LEFT JOIN tk_user_role AS ur ON ur.user_id = `user`.user_id
+            LEFT JOIN tk_role AS r ON r.role_id = ur.role_id
+    </sql>
+
+    <select id="selectUserVoByUsername" resultMap="userVoResultMap">
+        <include refid="selectUserVo"/>
+        WHERE `user`.username = #{username}
+    </select>
+
+
+</mapper>

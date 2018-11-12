@@ -35,7 +35,7 @@ public class RateLimitFillter extends ZuulFilter {
 
     @Override
     public boolean shouldFilter() {//可在此处设置一个限流开关。开启限流返回ture，关闭返回false
-        return true;
+        return false;
     }
 
     @Override

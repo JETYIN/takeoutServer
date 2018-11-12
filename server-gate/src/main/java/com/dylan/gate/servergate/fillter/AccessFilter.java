@@ -33,27 +33,13 @@ public class AccessFilter extends ZuulFilter {//fixme 把普通pojo实例化到s
     @Override
     public boolean shouldFilter() {//fixme 为true将会执行run方法
 
-        return true;
+        return false;
     }
 
-    //fixme jwt 的token使用公钥进行解密
     @Override
-    public Object run() throws ZuulException {//fixme 网关处安全控制--RequestContext传递数据--网关统一控制当前请求是否有token(未登陆情况)--将登录获取token的地址放过
-        RequestContext ctx = RequestContext.getCurrentContext();
-
-        HttpServletRequest request = ctx.getRequest();
-        log.info("enter accessfillter，current url:{}，current methodName：{}", request.getRequestURL(), request.getMethod());
-        String accessToken = request.getHeader("accessToken");
-        if (StringUtils.isEmpty(accessToken)) {//fixme 不含有token进行到登录界面--登录的url此时未含token，直接放过
-            log.error("cuurrent request has not accessToken");
-            //使用Zuul来过滤这次请求
-            ctx.setSendZuulResponse(false);
-            ctx.setResponseStatusCode(401);
-            return null;
-        }
-
-        log.info("request has accessed");
+    public Object run() throws ZuulException {
         return null;
-
     }
+
+
 }

@@ -1,0 +1,33 @@
+server:
+  port: 9013
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9001/eureka/
+
+
+#register to zipkin for check error log
+zipkin:
+  base-url: http://localhost:9411/
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
+
+spring:
+  application:
+    name: user-moudle
+  #connet mysql with name "takeout"
+  datasource:
+    name: dylan
+    url: jdbc:mysql://localhost:3306/takeout
+    username: root
+    password: 111111
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  type-aliases-package: com.dylan.user.moudle.modle.entity

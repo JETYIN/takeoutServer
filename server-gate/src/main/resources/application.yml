@@ -8,13 +8,16 @@ eureka:
 
 zuul:
   host:
-    connect-timeout-millis: 30000
-    socket-timeout-millis: 30000
+    connect-timeout-millis: 60000
+    socket-timeout-millis: 0000
   routes:
     auth-route:
-
-      path: /auth-server/**
+      path: /auth/**
       service-id: auth-moudle
+
+    user-route:
+      path: /user/**
+      service-id: user-moudle
   ratelimit:
     key-prefix: dylan-ratelimite
     enabled: true
@@ -40,6 +43,10 @@ spring:
 
     sampler:
       probability: 1.0
+
+
+
+
 
 
 
