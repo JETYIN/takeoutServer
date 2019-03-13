@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthFormSecurityConfig {
 
-
     protected final AuthenticationSuccessHandler authenticationSuccessHandler;//fixme PcAuthenticationFailureHandler类中实现并生成token
 
     /**
@@ -24,7 +23,7 @@ public class AuthFormSecurityConfig {
     protected final AuthenticationFailureHandler authenticationFailureHandler;//fixme 同上，都来自与paascloud-provider-uac
 
     /**
-     * 提供给资源服务器使用时将实例化此模块
+     * 因为在java中是先执行构造方法，可以在构造方法中针对需求的参数做Autowired自动装配
      *
      * @param authenticationSuccessHandler
      * @param authenticationFailureHandler
